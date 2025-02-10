@@ -14,7 +14,7 @@ return {
             'jsonls',
             'lemminx', -- xml lsp
             'yamlls',
-            'volar', -- vue language server
+            -- 'volar', -- vue language server
             'bashls',
             'marksman'
         },

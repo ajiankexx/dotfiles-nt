@@ -5,8 +5,8 @@ return {
     require('plugins.lua_line'),
     require('plugins.indent_blank_line'),
     require('plugins.explorer'),
-    require('plugins.smooth_scroll'),
-    require('plugins.smooth_cursor'),
+    -- require('plugins.smooth_scroll'),
+    -- require('plugins.smooth_cursor'),
 
     -- LSP
     require('plugins.mason'),
@@ -30,7 +30,7 @@ return {
     require('plugins.git_conflict'),
 
     require('plugins.copilot'),
-    require('plugins.avante'),
+    -- require('plugins.avante'),
 
     require('plugins.img_clip'),
     require('plugins.table_mode'),
@@ -58,7 +58,7 @@ return {
     require('plugins.auto_tag'),
     require('plugins.big_file'),
 
-    require('plugins.latex'),
+    -- require('plugins.latex'),
 
     -- require('plugins.rainbow_delimiter'),
 

@@ -191,9 +191,9 @@ return {
                     'buffer',
                     'ripgrep',
                     'lazydev',
-                    'dictionary',
-                    'git',
-                    'markdown',
+                    -- 'dictionary',
+                    -- 'git',
+                    -- 'markdown',
                 },
                 providers = {
                     markdown = {
@@ -242,18 +242,18 @@ return {
                             }
                         }
                     },
-                    dictionary = {
-                        module = 'blink-cmp-dictionary',
-                        name = 'Dict',
-                        min_keyword_length = 3,
-                        max_items = 5,
-                        score_offset = -3,
-                        --- @module 'blink-cmp-dictionary'
-                        --- @type blink-cmp-dictionary.Options
-                        opts = {
-                            dictionary_files = { vim.fn.expand('~/.config/nvim/dict/en_dict.txt') },
-                        },
-                    },
+                    -- dictionary = {
+                    --     module = 'blink-cmp-dictionary',
+                    --     name = 'Dict',
+                    --     min_keyword_length = 3,
+                    --     max_items = 5,
+                    --     score_offset = -3,
+                    --     --- @module 'blink-cmp-dictionary'
+                    --     --- @type blink-cmp-dictionary.Options
+                    --     opts = {
+                    --         dictionary_files = { vim.fn.expand('~/.config/nvim/dict/en_dict.txt') },
+                    --     },
+                    -- },
                     lsp = {
                         fallbacks = nil,
                         --- @param context blink.cmp.Context
