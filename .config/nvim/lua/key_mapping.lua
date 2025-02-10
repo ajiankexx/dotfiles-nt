@@ -51,3 +51,8 @@ map_set({ 'i' }, '<c-e>', function()
     vim.api.nvim_win_set_cursor(0, { vim.api.nvim_win_get_cursor(0)[1], #line })
 end)
 map_set({ 'n' }, '=', '<cmd>wincmd =<cr>', { desc = 'Equalize windows' })
+
+map_set({ 'i' }, '<c-l>', '<right>')
+map_set({ 'i' }, '<c-h>', '<left>')
+map_set({ 'i' }, '<c-j>', '<down>')
+map_set({ 'i' }, '<c-k>', '<up>')
