@@ -29,6 +29,7 @@ return {
                 HACK = {icon = " ", color = "warning"},
                 NOTE = {icon = "", color = "hint"},
                 PROB = {icon = " ", color = "error"},
+                Status = {icon = "󰭻", color = "#F96E2A"},
             },
         })
         local map_set = require('utils').map_set
