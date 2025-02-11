@@ -23,6 +23,13 @@ return {
                 },
                 pattern = [[\b(KEYWORDS):]],
             },
+            keywords = {
+                FIX = {icon = " ", color = "error"},
+                TODO = {icon = " ", color = "info"},
+                HACK = {icon = " ", color = "warning"},
+                NOTE = {icon = "", color = "hint"},
+                PROB = {icon = " ", color = "error"},
+            },
         })
         local map_set = require('utils').map_set
         local ts_repeat_move = require('nvim-treesitter.textobjects.repeatable_move')
