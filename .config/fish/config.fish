@@ -62,6 +62,7 @@ abbr -a tmrnwd tmux rename-window -t
 abbr -a nv nvim
 
 # use nvim as the default editor
+set --export PATH $PATH /home/ajianke/rime-ls/target/release
 set --export EDITOR nvim
 # node
 set --export PATH $PATH ~/node-v20.13.0-linux-x64/bin
