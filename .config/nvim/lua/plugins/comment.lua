@@ -19,8 +19,10 @@ return {
             ignore = nil,
             -- LHS of toggle mappings in NORMAL mode
             toggler = {
-                line = '<space>c<space>',
-                block = '<space>cs',
+                -- line = '<space>c<space>',
+                -- block = '<space>cs',
+                line = '<c-/>',
+                block = '<c-?>',
             },
             -- LHS of operator-pending mappings in NORMAL and VISUAL mode
             opleader = {
