@@ -30,6 +30,7 @@ return {
     require('plugins.avante'),
 
     require('plugins.markdown_render'),
+    require('plugins.markdown_preview'),
 
     require('plugins.auto_pairs'),
     require('plugins.auto_save'),

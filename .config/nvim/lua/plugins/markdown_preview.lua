@@ -11,7 +11,7 @@ local get_browser_available = function()
 end
 return {
     "iamcco/markdown-preview.nvim",
-    build = "cd app && yarn install",
+    build = "cd app && npm install",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = vim.g.markdown_support_filetype,
     init = function()
