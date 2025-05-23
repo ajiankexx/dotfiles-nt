@@ -83,3 +83,6 @@ map_set({ 'n' }, '<c-h>', '<c-w>h', { desc = 'cursor left' })
 map_set({ 'n' }, '<c-j>', '<c-w>j', { desc = 'cursor down' })
 map_set({ 'n' }, '<c-k>', '<c-w>k', { desc = 'cursor up' })
 map_set({ 'n' }, '<c-l>', '<c-w>l', { desc = 'cursor right' })
+
+map_set({ 'i' }, '<c-l>', '<right>')
+-- map_set({ 'i' }, '<c-l>', '<home>')

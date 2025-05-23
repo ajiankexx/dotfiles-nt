@@ -144,4 +144,4 @@ function y
     rm -f -- "$tmp"
 end
 
-zoxide init --cmd cd fish | source
+zoxide init fish | source
