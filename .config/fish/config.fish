@@ -4,6 +4,15 @@
 # | (_| (_) | | | |  _| | (_| |_|  _| \__ \ | | | |   < (_| | \__ \  __/ |   
 #  \___\___/|_| |_|_| |_|\__, (_)_| |_|___/_| |_| |_|\_\__,_|_|___/\___|_|   
 #                        |___/                                               
+
+# ajiankexx's config
+abbr -a fastsource source .venv/bin/activate.fish
+abbr -a catpath 'string join \n $PATH'
+abbr -a editfish vim ~/dotfiles-nt/.config/fish/config.fish
+abbr -a sourcefish source ~/.config/fish/config.fish
+abbr -a editnvim 'cd ~/dotfiles-nt/.config/nvim && nvim .'
+abbr -a dotupdate 'cd ~/dotfiles-nt && ./dot_files.py update'
+
 # abbreviations for git
 abbr -a lzg lazygit
 abbr -a gco git checkout
