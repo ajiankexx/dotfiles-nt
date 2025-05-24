@@ -14,6 +14,10 @@ abbr -a sourcefish source ~/.config/fish/config.fish
 abbr -a editnvim 'cd ~/dotfiles-nt/.config/nvim && nvim .'
 abbr -a dotupdate 'cd ~/dotfiles-nt && ./dot_files.py update'
 
+function nvimtest
+    env NVIM_APPNAME="nvim-test" nvim $argv
+end
+
 # abbreviations for git
 abbr -a lzg lazygit
 abbr -a gco git checkout
