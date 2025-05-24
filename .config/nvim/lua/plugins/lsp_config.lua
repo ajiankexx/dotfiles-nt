@@ -31,7 +31,7 @@ return {
             'rime_ls',
             'tailwindcss',
             'ts_ls',
-            'volar',
+            'vue_ls',
             'yamlls',
         })
     end,

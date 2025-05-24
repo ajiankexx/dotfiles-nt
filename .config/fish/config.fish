@@ -6,8 +6,8 @@
 #                        |___/                                               
 
 # ajiankexx's config
-abbr -a cdwork cd /home/desu/work
-abbr -a sourceuv source .venv/bin/activate.fish
+abbr -a cdwork cd ~/work
+abbr -a sourceuv source ./.venv/bin/activate.fish
 abbr -a catpath 'string join \n $PATH'
 abbr -a editfish vim ~/dotfiles-nt/.config/fish/config.fish
 abbr -a sourcefish source ~/.config/fish/config.fish
@@ -74,7 +74,7 @@ abbr -a nv nvim
 # use nvim as the default editor
 set --export EDITOR nvim
 # node
-set --export PATH $PATH /home/desu/.nvm/versions/node/v24.1.0/bin
+set --export PATH $PATH ~/.nvm/versions/node/v24.1.0/bin
 # the directory where user lib pip will install
 set --export PATH $PATH ~/.local/bin
 # the directory where user cargo will install
