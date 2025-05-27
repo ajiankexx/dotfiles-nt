@@ -43,5 +43,8 @@ return {
     require('plugins.which_key'),
     require('plugins.win_resizer'),
     require('plugins.yanky'),
+    require('plugins.img_clip'),
+    require('plugins.pastify'),
+    require('plugins.kulala')
 
 }
