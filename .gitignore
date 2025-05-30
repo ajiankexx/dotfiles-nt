@@ -1,3 +1,4 @@
+# Author: kaiser-yang
 # back up files
 backup
 
@@ -11,3 +12,7 @@ markdownBackup
 
 .repro/
 repro.lua
+
+# Author: ajiankexx
+.test
+.assets

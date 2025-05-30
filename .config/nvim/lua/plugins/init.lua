@@ -45,6 +45,6 @@ return {
     require('plugins.yanky'),
     require('plugins.img_clip'),
     require('plugins.pastify'),
-    require('plugins.kulala')
-
+    require('plugins.kulala'),
+    require('plugins.flash')
 }
