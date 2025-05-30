@@ -55,7 +55,7 @@ return {
         save = 'local_file',
       },
       ft = {
-                markdown = '![]($IMG$)(<++>){: .img-fluid}',
+                markdown = '![]($IMG$)\n<++>',
             }
     }
   end

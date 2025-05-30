@@ -88,6 +88,8 @@ set --export PATH $PATH ~/.cargo/bin
 set --export PATH $PATH ~/.yarn/bin
 # neovim path
 set --export PATH $PATH /opt/nvim-linux64/bin
+# node
+set --export PATH ~/.nvm/versions/node/v24.1.0/bin $PATH
 
 # this enable .. be cd ../, ... be cd ../../
 # .... be cd ../../../
