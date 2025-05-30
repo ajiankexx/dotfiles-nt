@@ -6,19 +6,20 @@
 #                        |___/                                               
 
 # ajiankexx's config
-abbr -a cdwork cd ~/work
-abbr -a sourceuv source ./.venv/bin/activate.fish
-abbr -a catpath 'string join \n $PATH'
+abbr -a fastsource source .venv/bin/activate.fish
+abbr -a cat_path "echo $abbr -a cat_path 'string join \n $PATH'abbr -a cat_path 'string join \n $PATH'abbr -a cat_path 'string join \n $PATH'(PATH) | tr ' ' '\n'"
+
 abbr -a editfish vim ~/dotfiles-nt/.config/fish/config.fish
 abbr -a sourcefish source ~/.config/fish/config.fish
 abbr -a editnvim 'cd ~/dotfiles-nt/.config/nvim && nvim .'
 abbr -a dotupdate 'cd ~/dotfiles-nt && ./dot_files.py update'
 
-function nvimtest
-    env NVIM_APPNAME="nvim-test" nvim $argv
-end
-
 # abbreviations for git
+abbr -a cdrtp cd ~/.local/share/nvim/lazy
+abbr -a cdcfg cd ~/dotfiles-nt
+abbr -a cdwork cd ~/work
+abbr -a cddoc cd ~/doc
+
 abbr -a lzg lazygit
 abbr -a gco git checkout
 abbr -a gst git status
@@ -78,7 +79,7 @@ abbr -a nv nvim
 # use nvim as the default editor
 set --export EDITOR nvim
 # node
-set --export PATH $PATH ~/.nvm/versions/node/v24.1.0/bin
+set --export PATH $PATH ~/node-v20.13.0-linux-x64/bin
 # the directory where user lib pip will install
 set --export PATH $PATH ~/.local/bin
 # the directory where user cargo will install
@@ -159,17 +160,3 @@ function y
 end
 
 zoxide init fish | source
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-if test -f /home/desu/miniconda3/bin/conda
-    eval /home/desu/miniconda3/bin/conda "shell.fish" "hook" $argv | source
-else
-    if test -f "/home/desu/miniconda3/etc/fish/conf.d/conda.fish"
-        . "/home/desu/miniconda3/etc/fish/conf.d/conda.fish"
-    else
-        set -x PATH "/home/desu/miniconda3/bin" $PATH
-    end
-end
-# <<< conda initialize <<<
-
