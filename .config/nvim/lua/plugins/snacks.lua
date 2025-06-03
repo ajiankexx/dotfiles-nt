@@ -287,7 +287,7 @@ return {
             desc = 'Resume last picker',
         },
         {
-            '<leader>r',
+            '<leader>R',
             function()
                 local fullpath = vim.fn.expand('%:p')
                 local directory = vim.fn.fnamemodify(fullpath, ':h')

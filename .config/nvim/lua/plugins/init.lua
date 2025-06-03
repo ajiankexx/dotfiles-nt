@@ -20,6 +20,7 @@ return {
     require('plugins.blink_cmp'),
     require('plugins.formatter'),
 
+    require('plugins.terminal'),
     -- Git
     require('plugins.git_signs'),
     require('plugins.git_conflict'),
