@@ -162,3 +162,7 @@ function y
 end
 
 zoxide init fish | source
+
+function nvimtest
+    env NVIM_APPNAME="nvim-test" nvim $argv
+end
