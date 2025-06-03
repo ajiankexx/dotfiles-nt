@@ -53,6 +53,31 @@ return {
                 },
             },
         })
+
+        local function quit_not_save_on_buffer1()
+            local current_buf = vim.api.nvim_get_current_buf()
+
+            -- 当前 buffer 不可见，直接关闭窗口
+            if not utils.is_visible_buffer(current_buf) then
+                vim.cmd('silent q!')
+                return
+            end
+
+            local visible_bufs = utils.get_visible_bufs()
+
+            -- 多个可见 buffer，安全关闭当前 buffer
+            if #visible_bufs > 1 then
+                Snacks.bufdelete()
+                return
+            end
+
+            -- 只有一个可见 buffer，关闭它后不退出 Neovim
+            Snacks.bufdelete()
+
+            -- 可选：关闭最后一个 buffer 后打开空 buffer 保持 Neovim 打开
+            vim.cmd('enew')
+        end
+
         local function quit_not_save_on_buffer()
             if not utils.is_visible_buffer(vim.api.nvim_get_current_buf()) then
                 vim.cmd('silent q!')
@@ -76,7 +101,7 @@ return {
         end
 
         local map_set = utils.map_set
-        map_set({ 'n' }, 'Q', quit_not_save_on_buffer)
+        map_set({ 'n' }, 'Q', quit_not_save_on_buffer1)
         map_set(
             { 'n' },
             '<leader>1',
