@@ -101,7 +101,7 @@ return {
         end
 
         local map_set = utils.map_set
-        map_set({ 'n' }, 'Q', quit_not_save_on_buffer1)
+        map_set({ 'n' }, 'Q', quit_not_save_on_buffer)
         map_set(
             { 'n' },
             '<leader>1',

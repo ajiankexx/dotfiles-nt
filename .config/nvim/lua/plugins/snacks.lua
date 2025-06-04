@@ -157,6 +157,9 @@ return {
                         ['<a-g>'] = false,
                         ['<a-h>'] = false,
                         ['<c-q>'] = { 'qflist', mode = { 'i', 'n' } },
+
+                        ['2'] = 'focus_list',
+                        ['3'] = 'focus_preview'
                     },
                 },
                 -- result list window
@@ -210,6 +213,9 @@ return {
                         ['/'] = false,
                         ['<s-cr>'] = false,
                         ['<c-q>'] = 'qflist',
+
+                        ['1'] = 'focus_input',
+                        ['3'] = 'focus_preview',
                     },
                 },
                 -- preview window
@@ -225,6 +231,9 @@ return {
                         ['<esc>'] = 'cancel',
                         ['<c-n>'] = 'cancel',
                         ['<a-w>'] = 'cycle_win',
+
+                        ['1'] = 'focus_input',
+                        ['2'] = 'focus_list',
                     },
                 },
             },
