@@ -201,7 +201,7 @@ return {
                         end,
                         desc = 'Enter Dir or Open File',
                     },
-                    ['<f5>'] = 'refresh',
+                    ['R'] = 'refresh',
                     ['?'] = 'show_help',
                     ['h'] = {
                         function(state)
