@@ -53,6 +53,8 @@ return {
                     command = string.format('wslview "%s" &', filename)
                 elseif vim.bo.filetype == 'lua' then
                     command = string.format('lua "%s"', filename)
+                elseif vim.bo.filetype == 'go' then
+                    command = string.format('time go run "%s"', filename)
                 end
                 if command == '' then
                     print('Unsupported filetype')
