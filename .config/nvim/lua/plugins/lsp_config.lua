@@ -33,6 +33,7 @@ return {
             'ts_ls',
             'vue_ls',
             'yamlls',
+            'gopls',
         })
     end,
 }

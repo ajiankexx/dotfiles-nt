@@ -19,6 +19,7 @@ return {
             'jsonls',
             'lemminx', -- xml lsp
             'yamlls',
+            'gopls',
         },
         automatic_installation = true
     }
