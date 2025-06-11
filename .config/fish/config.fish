@@ -90,9 +90,10 @@ abbr -a tmrnwd tmux rename-window -t
 abbr -a nv nvim
 
 # use vim as the default editor
-set --export EDITOR vim
+set --export EDITOR nvim
 # go
 set --export PATH $PATH /usr/local/go/bin
+set --export PATH $PATH ~/go/bin # for gopls
 # node
 set --export PATH $PATH ~/node-v20.13.0-linux-x64/bin
 # the directory where user lib pip will install

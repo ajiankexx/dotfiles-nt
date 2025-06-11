@@ -35,6 +35,6 @@ return {
         -- vim.keymap.set({ 'n', 'x', 'o' }, 'b', non_ascii.b, { desc = 'Previous word' })
         -- vim.keymap.set({ 'n', 'x', 'o' }, 'e', non_ascii.e, { desc = 'Next end word' })
         -- vim.keymap.set({ 'n', 'x', 'o' }, 'ge', non_ascii.ge, { desc = 'Previous end word' })
-        vim.keymap.set({ 'x', 'o' }, 'iw', non_ascii.iw, { desc = 'Inside a word' })
+        vim.keymap.set({ 'n', 'x', 'o' }, 'iw', non_ascii.iw, { desc = 'Inside a word' })
     end,
 }
