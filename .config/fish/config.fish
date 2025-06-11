@@ -20,6 +20,19 @@ abbr -a cdcfg cd ~/dotfiles-nt
 abbr -a cdwork cd ~/work
 abbr -a cddoc cd ~/doc
 
+# abbr for atuin
+abbr -a atns atuin search
+abbr -a atni atuin import auto
+abbr -a atnstats atuin stats
+abbr -a atnhis atuin history
+
+# abbr for docker
+abbr -a docker sudo docker
+abbr -a sdc sudo docker compose
+
+# more effective tools 
+abbr -a ls exa
+
 abbr -a lzg lazygit
 abbr -a gco git checkout
 abbr -a gst git status
@@ -76,8 +89,10 @@ abbr -a tmrnwd tmux rename-window -t
 # nv for nvim
 abbr -a nv nvim
 
-# use nvim as the default editor
-set --export EDITOR nvim
+# use vim as the default editor
+set --export EDITOR vim
+# go
+set --export PATH $PATH /usr/local/go/bin
 # node
 set --export PATH $PATH ~/node-v20.13.0-linux-x64/bin
 # the directory where user lib pip will install
