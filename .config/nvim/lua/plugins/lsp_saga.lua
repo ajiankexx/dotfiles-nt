@@ -66,7 +66,7 @@ return {
         )
         map_set({ 'n' }, 'gi', '<cmd>Lspsaga finder imp<cr>', { desc = 'Go to implementations' })
         map_set({ 'n' }, 'gr', '<cmd>Lspsaga finder ref<cr>', { desc = 'Go references' })
-        map_set({ 'n' }, '<leader>d', '<cmd>Lspsaga hover_doc<cr>', { desc = 'Hover document' })
+        map_set({ 'n' }, '<leader>d', '<cmd>Lspsaga peek_definition<cr>', { desc = 'peek definition' })
         map_set(
             { 'n' },
             '<leader>i',

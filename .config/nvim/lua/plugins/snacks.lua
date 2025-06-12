@@ -350,6 +350,42 @@ return {
             desc = 'Run and compile',
         },
         {
+          '<leader>spd',
+            function()
+                Snacks.picker.diagnostics()
+            end,
+            desc = 'Snacks.picker.diagnostics()'
+        },
+        {
+            '<leader>spm',
+            function()
+                Snacks.picker.man()
+            end,
+            desc = 'Snacks.picker.man()'
+        },
+        {
+            '<leader>spk',
+            function()
+                Snacks.picker.keymaps()
+            end,
+            desc = 'Snacks.picker.keymaps()'
+        },
+        {
+            '<leader>spb',
+            function()
+                Snacks.picker.buffers(
+                )
+            end,
+            desc = 'Snacks.picker.buffers()'
+        },
+        {
+            '<leader>sph',
+            function()
+                Snacks.picker.help()
+            end,
+            desc = 'Snacks.picker.help()'
+        },
+        {
             '<c-p>',
             function()
                 Snacks.picker.files({
