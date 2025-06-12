@@ -288,8 +288,8 @@ return {
             desc = 'Toggle Lazygit',
             mode = { 'n', 't' },
         },
-        { '<c-t>', function() Snacks.terminal() end, desc = 'Toggle Terminal' },
-        { '<c-t>', '<cmd>close<cr>', desc = 'Toggle Terminal', mode = { 't' } },
+        -- { '<c-t>', function() Snacks.terminal() end, desc = 'Toggle Terminal' },
+        -- { '<c-t>', '<cmd>close<cr>', desc = 'Toggle Terminal', mode = { 't' } },
         {
             '<c-y>',
             function() Snacks.picker.resume() end,
