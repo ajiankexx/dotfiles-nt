@@ -20,6 +20,7 @@ return {
             'lemminx', -- xml lsp
             'yamlls',
             'gopls',
+            'rust_analyzer',
         },
         automatic_installation = true
     }

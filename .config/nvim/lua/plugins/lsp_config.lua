@@ -34,6 +34,7 @@ return {
             'vue_ls',
             'yamlls',
             'gopls',
+            'rust_analyzer',
         })
     end,
 }
