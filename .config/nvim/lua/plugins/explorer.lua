@@ -228,7 +228,9 @@ return {
                         desc = 'Toggle or Open',
                     },
                     -- TODO: laggy and abrupt
-                    -- ['P'] = { 'toggle_preview', config = { use_float = true, use_image_nvim = false } },
+                    ['P'] = { 'toggle_preview', config = { use_float = true, use_image_nvim = false } },
+                    ['<esc>'] = "cancel",
+                    ['f'] = 'focus_preview',
                 },
             },
             filesystem = {
