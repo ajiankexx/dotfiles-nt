@@ -1,4 +1,3 @@
--- map_set({ 'n' }, 'y', api.fs.copy.filename, opts('Copy Name'))
 local utils = require('utils')
 local map_set = utils.map_set
 local feedkeys = utils.feedkeys
@@ -51,10 +50,6 @@ return {
             require('neo-tree.sources.filesystem.commands').next_git_modified,
             require('neo-tree.sources.filesystem.commands').prev_git_modified
         )
-        -- TODO:
-        -- local next_diagnostic_repeat, prev_diagnostic_repeat = ts_repeat_move.make_repeatable_move_pair(
-        --     api.node.navigate.diagnostics.next,
-        --     api.node.navigate.diagnostics.prev)
         require('neo-tree').setup({
             sources = {
                 'filesystem',
@@ -81,16 +76,20 @@ return {
                     end,
                 },
                 {
-                    event = events.NEO_TREE_WINDOW_AFTER_OPEN,
-                    handler = function(_) vim.cmd('wincmd =') end,
-                },
-                {
                     event = events.FILE_MOVED,
                     handler = on_move,
                 },
                 {
                     event = events.FILE_RENAMED,
                     handler = on_move,
+                },
+                {
+                    event = events.NEO_TREE_WINDOW_AFTER_OPEN,
+                    handler = function(_) vim.g.explorer_visible = true end,
+                },
+                {
+                    event = events.NEO_TREE_WINDOW_BEFORE_CLOSE,
+                    handler = function(_) vim.g.explorer_visible = false end,
                 },
             },
             default_component_configs = {
@@ -409,7 +408,6 @@ return {
                 },
             },
         })
-        local get_root_directory = require('utils').get_root_directory
         local function move_cursor_to_neo_tree()
             for _, win in pairs(vim.api.nvim_list_wins()) do
                 if vim.bo[vim.api.nvim_win_get_buf(win)].filetype == 'neo-tree' then
@@ -426,7 +424,6 @@ return {
                 source = 'git_status',
                 reveal = true,
                 reveal_file = current_file,
-                dir = get_root_directory(),
             })
         end)
         map_set({ 'n' }, '<c-e>', function()
@@ -436,7 +433,6 @@ return {
                 source = 'filesystem',
                 reveal = true,
                 reveal_file = current_file,
-                dir = get_root_directory(),
             })
         end)
         map_set({ 'n' }, '<c-w>', function()
@@ -445,26 +441,5 @@ return {
                 source = 'document_symbols',
             })
         end)
-
-        vim.api.nvim_create_autocmd('FileType', {
-            pattern = 'neo-tree-popup',
-            callback = function()
-                vim.wo.wrap = false
-                -- map_set({ 'n', 'i' }, '<c-n>', function()
-                --     if vim.api.nvim_get_mode().mode == 'i' or vim.api.nvim_get_mode().mode == 'I' then
-                --         feedkeys('<esc>', 'n')
-                --     else
-                --         feedkeys('i<c-c>', 'm')
-                --     end
-                -- end, { buffer = true })
-                -- map_set({ 'n', 'i' }, '<esc>', function()
-                --     if vim.api.nvim_get_mode().mode == 'i' or vim.api.nvim_get_mode().mode == 'I' then
-                --         feedkeys('<esc>', 'n')
-                --     else
-                --         feedkeys('i<c-c>', 'm')
-                --     end
-                -- end, { buffer = true })
-            end,
-        })
     end,
 }

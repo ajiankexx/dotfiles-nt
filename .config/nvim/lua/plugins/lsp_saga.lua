@@ -2,7 +2,6 @@ return {
     'nvimdev/lspsaga.nvim',
     dependencies = {
         'nvim-treesitter/nvim-treesitter-textobjects',
-        'nvim-treesitter/nvim-treesitter',
         'nvim-tree/nvim-web-devicons',
         'catppuccin/nvim',
     },
@@ -56,7 +55,6 @@ return {
         })
         local map_set = require('utils').map_set
         local feedkeys = require('utils').feedkeys
-        map_set({ 'n', 'x' }, 'ga', '<cmd>Lspsaga code_action<cr>', { desc = 'Code action' })
         map_set({ 'n' }, 'gd', '<cmd>Lspsaga goto_definition<cr>', { desc = 'Go to definition' })
         map_set(
             { 'n' },

@@ -1,28 +1,21 @@
 return {
     'neovim/nvim-lspconfig',
     dependencies = {
-        'williamboman/mason.nvim',
-        'williamboman/mason-lspconfig.nvim',
-        'saghen/blink.cmp',
-        'nvim-java/nvim-java',
+        'aznhe21/actions-preview.nvim',
+        {
+
+            'mfussenegger/nvim-jdtls',
+            dependencies = {
+                'mfussenegger/nvim-dap',
+            },
+        },
     },
     config = function()
-        local lsp_capabilities = vim.lsp.protocol.make_client_capabilities()
-        -- Disable the snippets of lsp
-        lsp_capabilities.textDocument.completion.completionItem.snippetSupport = false;
-        lsp_capabilities = require('blink.cmp').get_lsp_capabilities(lsp_capabilities)
-        lsp_capabilities.textDocument.foldingRange = {
-            dynamicRegistration = false,
-            lineFoldingOnly = true,
-        }
-        local default = require('lspconfig').util.default_config
-        default.capabilities = vim.tbl_deep_extend('force', default.capabilities, lsp_capabilities)
         vim.lsp.config('*', { root_markers = vim.g.root_markers })
         vim.lsp.enable({
             'bashls',
             'clangd',
             'eslint',
-            'jdtls',
             'jsonls',
             'lemminx',
             'lua_ls',
@@ -35,6 +28,14 @@ return {
             'yamlls',
             'gopls',
             'rust_analyzer',
+            'markdown_oxide',
         })
+        local map_set = require('utils').map_set
+        map_set(
+            { 'v', 'n' },
+            'ga',
+            require('actions-preview').code_actions,
+            { desc = 'Code action' }
+        )
     end,
 }

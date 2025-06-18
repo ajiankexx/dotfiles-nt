@@ -1,6 +1,15 @@
 local utils = require('utils')
 local completion_keymap = {
     preset = 'none',
+    ['<c-x>'] = {
+        function(cmp)
+            if cmp.is_visible() then
+                cmp.show_documentation()
+            else
+                cmp.show({ providers = { 'snippets' } })
+            end
+        end,
+    },
     ['<cr>'] = { 'accept', 'fallback' },
     ['<tab>'] = { 'snippet_forward', 'fallback' },
     ['<s-tab>'] = { 'snippet_backward', 'fallback' },
@@ -12,6 +21,9 @@ local completion_keymap = {
     ['<space>'] = {
         function(cmp)
             if not vim.g.rime_enabled then return false end
+            local content_before_cursor =
+                string.sub(vim.api.nvim_get_current_line(), 1, vim.api.nvim_win_get_cursor(0)[2])
+            if content_before_cursor:match('%w+$') == nil then return false end
             local rime_item_index = utils.get_n_rime_item_index(1, nil)
             if #rime_item_index ~= 1 then return false end
             return cmp.accept({ index = rime_item_index[1] })
@@ -22,6 +34,9 @@ local completion_keymap = {
         -- FIX: can not work when binding ;<space> to other key
         function(cmp)
             if not vim.g.rime_enabled then return false end
+            local content_before_cursor =
+                string.sub(vim.api.nvim_get_current_line(), 1, vim.api.nvim_win_get_cursor(0)[2])
+            if content_before_cursor:match('%w+$') == nil then return false end
             local rime_item_index = utils.get_n_rime_item_index(2, nil)
             if #rime_item_index ~= 2 then return false end
             return cmp.accept({ index = rime_item_index[2] })
@@ -124,7 +139,8 @@ return {
                     range = 'full',
                 },
                 list = {
-                    selection = { preselect = false, auto_insert = true },
+                    -- preselect = true is helpful for snippets
+                    selection = { preselect = true, auto_insert = true },
                 },
                 menu = {
                     border = 'rounded',
@@ -170,7 +186,7 @@ return {
                     },
                 },
                 documentation = {
-                    auto_show = true,
+                    auto_show = false,
                     window = {
                         border = 'rounded',
                     },
@@ -199,9 +215,6 @@ return {
                         'snippets',
                         'path',
                     }
-                    if vim.fn.expand('%:p'):find('.config/nvim') then
-                        result[#result + 1] = 'lazydev'
-                    end
                     if vim.bo.filetype == 'AvanteInput' then
                         result[#result + 1] = 'avante'
                     elseif
@@ -248,13 +261,10 @@ return {
                                 duplicateIssue = '',
                                 lockedIssue = '',
                             },
-                            commit = {
-                                insert_text_trailing = '',
-                            },
+                            commit = { enable = false },
                             git_centers = {
                                 github = {
                                     pull_request = {
-                                        insert_text_trailing = '',
                                         get_command_args = function(command, token)
                                             local args =
                                                 require('blink-cmp-git.default.github').pull_request.get_command_args(
@@ -273,7 +283,6 @@ return {
                                         configure_score_offset = pr_or_issue_configure_score_offset,
                                     },
                                     issue = {
-                                        insert_text_trailing = '',
                                         get_command_args = function(command, token)
                                             local args =
                                                 require('blink-cmp-git.default.github').issue.get_command_args(
@@ -289,13 +298,9 @@ return {
                                         end,
                                         configure_score_offset = pr_or_issue_configure_score_offset,
                                     },
-                                    mention = {
-                                        insert_text_trailing = '',
-                                    },
                                 },
                                 gitlab = {
                                     pull_request = {
-                                        insert_text_trailing = '',
                                         get_command_args = function(command, token)
                                             local args =
                                                 require('blink-cmp-git.default.gitlab').pull_request.get_command_args(
@@ -313,7 +318,6 @@ return {
                                         configure_score_offset = pr_or_issue_configure_score_offset,
                                     },
                                     issue = {
-                                        insert_text_trailing = '',
                                         get_command_args = function(command, token)
                                             local args =
                                                 require('blink-cmp-git.default.gitlab').issue.get_command_args(
@@ -328,9 +332,6 @@ return {
                                                 or item.state .. 'Issue'
                                         end,
                                         configure_score_offset = pr_or_issue_configure_score_offset,
-                                    },
-                                    mention = {
-                                        insert_text_trailing = '',
                                     },
                                 },
                             },
@@ -352,15 +353,17 @@ return {
                         --- @param items blink.cmp.CompletionItem[]
                         transform_items = function(context, items)
                             local TYPE_ALIAS = require('blink.cmp.types').CompletionItemKind
-                            items = vim.tbl_filter(
-                                function(item)
-                                    -- Remove Snippets and Text from completion list
-                                    return item.kind ~= TYPE_ALIAS.Snippet
-                                            and item.kind ~= TYPE_ALIAS.Text
-                                        or utils.is_rime_item(item)
-                                end,
-                                items
-                            )
+                            items = vim.tbl_filter(function(item)
+                                -- Remove Snippets and Text from completion list
+                                return item.kind ~= TYPE_ALIAS.Snippet
+                                        and item.kind ~= TYPE_ALIAS.Text
+                                        and not (vim.tbl_contains(
+                                            { 'if', 'end', 'while', 'function', 'elseif' },
+                                            item.label
+                                        ) and item.kind == TYPE_ALIAS.Keyword)
+                                    or utils.is_rime_item(item)
+                                        and item.label:match('^%w*$') == nil
+                            end, items)
                             if utils.rime_ls_disabled(context) then
                                 return vim.tbl_filter(
                                     function(item) return not utils.is_rime_item(item) end,
@@ -385,11 +388,6 @@ return {
                             trailing_slash = false,
                             show_hidden_files_by_default = true,
                         },
-                    },
-                    lazydev = {
-                        name = 'LazyDev',
-                        module = 'lazydev.integrations.blink',
-                        score_offset = 100,
                     },
                     ripgrep = {
                         name = 'RG',

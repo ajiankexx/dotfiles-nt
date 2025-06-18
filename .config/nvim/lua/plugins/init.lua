@@ -9,16 +9,15 @@ return {
     require('plugins.tree_sitter'),
 
     -- LSP
-    require('plugins.lazy_dev'),
     require('plugins.lsp_config'),
     require('plugins.lsp_saga'),
     require('plugins.mason'),
     require('plugins.mason_lsp_config'),
-    require('plugins.nvim_java'),
     require('plugins.ufo'),
     -- require('plugins.non-ascii'),
 
     require('plugins.blink_cmp'),
+    require('plugins.debugger'),
     require('plugins.formatter'),
 
     require('plugins.terminal'),
@@ -31,6 +30,8 @@ return {
     require('plugins.copilot'),
     require('plugins.avante'),
 
+    require('plugins.img_clip'),
+    require('plugins.markdown_toc'),
     require('plugins.markdown_render'),
     require('plugins.markdown_preview'),
 
@@ -40,7 +41,10 @@ return {
     require('plugins.auto_tag'),
     require('plugins.buffer_line'),
     require('plugins.comment'),
-    require('plugins.snacks'),
+    require('plugins.guess_indent'),
+    require('plugins.highlight_colors'),
+    require('plugins.search'),
+    require('plugins.snacks_config'),
     require('plugins.surround'),
     require('plugins.which_key'),
     require('plugins.win_resizer'),
@@ -49,4 +53,5 @@ return {
     require('plugins.pastify'),
     require('plugins.kulala'),
     require('plugins.flash')
+    -- require('plugins.non_ascii')
 }

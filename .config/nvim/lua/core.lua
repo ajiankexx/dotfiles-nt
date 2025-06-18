@@ -1,9 +1,9 @@
 -- INFO: Those variables do not support wildcards
 vim.g.markdown_support_filetype = { 'markdown', 'gitcommit', 'text', 'Avante' }
-vim.g.root_markers = { '.git', '.root', 'pom.xml', 'go.mod', 'pyproject.toml' }
+vim.g.root_markers = { '.git', '.root', 'pom.xml', 'mvnw', 'gradlew', 'pom.xml', 'build.gradle' }
 vim.g.frontend_filetype = { 'typescript', 'javascript', 'vue', 'html', 'css' }
 
-vim.g.big_file_limit = 1 * 1024 * 1024 -- 1 MB
+vim.g.big_file_limit = 0.5 * 1024 * 1024 -- 0.5 MB
 
 -- When input method is enabled, disable the following patterns
 vim.g.disable_rime_ls_pattern = {
@@ -25,6 +25,7 @@ vim.g.mapleader = ' '
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.o.cmdheight = 0
 vim.o.signcolumn = 'yes'
 vim.o.jumpoptions = 'stack,clean'
 vim.o.termguicolors = true
@@ -50,7 +51,6 @@ vim.o.tabstop = 4
 -- >> and << will shift lines by 4
 vim.o.shiftwidth = 4
 -- Every <tab> will go right by 4 spaces, every <bs> will go left by 4 spaces
-vim.o.softtabstop = 4
 vim.o.showbreak = '↪'
 vim.o.encoding = 'utf-8'
 vim.o.foldlevel = 99
@@ -65,30 +65,39 @@ vim.api.nvim_create_autocmd('ModeChanged', {
         vim.schedule(function() vim.cmd('nohlsearch') end)
     end,
 })
-vim.api.nvim_create_autocmd('FileType', {
+-- When moving cursor out of a match, disable hlsearch
+vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
     group = 'UserDIY',
-    pattern = 'gitcommit',
-    callback = function() vim.wo.colorcolumn = '50,72' end,
-})
-vim.api.nvim_create_autocmd('FileType', {
-    group = 'UserDIY',
-    pattern = 'java',
     callback = function()
-        if vim.fn.expand('%:p'):find('gcs%-back%-end') then
-            vim.bo.tabstop = 2
-            vim.bo.shiftwidth = 2
-            vim.bo.softtabstop = 2
+        local mode = vim.fn.mode()
+        if mode ~= 'n' then return end -- Only handle normal mode
+        local pattern = vim.fn.getreg('/') -- Get last search pattern
+        if pattern == '' then return end -- Skip if no pattern
+        local cursor_pos = vim.api.nvim_win_get_cursor(0)
+        local match_pos = vim.fn.matchbufline(
+            vim.api.nvim_get_current_buf(),
+            pattern,
+            cursor_pos[1],
+            cursor_pos[1]
+        )
+        local cursor_in_match = false
+        for _, match in pairs(match_pos) do
+            if match.byteidx <= cursor_pos[2] and match.byteidx + #match.text > cursor_pos[2] then
+                cursor_in_match = true
+                break
+            end
+        end
+        if not cursor_in_match then
+            vim.schedule(function() vim.cmd('nohlsearch') end)
+        else
+            vim.schedule(function() vim.cmd('set hlsearch') end)
         end
     end,
 })
 vim.api.nvim_create_autocmd('FileType', {
     group = 'UserDIY',
-    pattern = vim.g.frontend_filetype,
-    callback = function()
-        vim.bo.tabstop = 2
-        vim.bo.shiftwidth = 2
-        vim.bo.softtabstop = 2
-    end,
+    pattern = 'gitcommit',
+    callback = function() vim.wo.colorcolumn = '50,72' end,
 })
 vim.api.nvim_create_autocmd('VimLeavePre', {
     callback = function()

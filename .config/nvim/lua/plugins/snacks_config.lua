@@ -1,5 +1,5 @@
--- map_set({ 'n' }, 'z=', builtin.spell_suggest, { desc = 'Spell suggestions' })
-local map_set = require('utils').map_set
+local utils = require('utils')
+local map_set = utils.map_set
 local file_ignore_patterns = {
     '%.git',
     '%.root',
@@ -19,12 +19,12 @@ local file_ignore_patterns = {
     '%.tar.gz',
     '3rdparty',
 }
-local utils = require('utils')
 return {
     'folke/snacks.nvim',
     priority = 1000,
     lazy = false,
     dependencies = {
+        'HakonHarnes/img-clip.nvim',
         'nvim-treesitter/nvim-treesitter-textobjects',
         'nvim-treesitter/nvim-treesitter',
         'MeanderingProgrammer/render-markdown.nvim',
@@ -283,6 +283,20 @@ return {
 
     keys = {
         {
+            '<leader>sp',
+            function()
+                Snacks.picker.files({
+                    ft = { 'jpg', 'jpeg', 'png', 'webp' },
+                    confirm = function(self, item, _)
+                        self:close()
+                        require('img-clip').paste_image({}, './' .. item.file)
+                    end,
+                })
+            end,
+            desc = 'Paste image from file',
+            mode = { 'n' },
+        },
+        {
             '<c-g>',
             function() Snacks.lazygit() end,
             desc = 'Toggle Lazygit',
@@ -303,7 +317,7 @@ return {
                 local filename = vim.fn.fnamemodify(fullpath, ':t')
                 local filename_noext = vim.fn.fnamemodify(fullpath, ':t:r')
                 local command = ''
-                if vim.bo.filetype == 'markdown' then
+                if vim.tbl_contains(vim.g.markdown_support_filetype, vim.bo.filetype) then
                     vim.cmd('RenderMarkdown buf_toggle')
                     return
                 elseif vim.bo.filetype == 'c' then
@@ -389,7 +403,7 @@ return {
             '<c-p>',
             function()
                 Snacks.picker.files({
-                    cwd = utils.get_root_directory(),
+                    cwd = vim.fn.getcwd(),
                     hidden = true,
                     exclude = file_ignore_patterns,
                 })
@@ -518,7 +532,7 @@ return {
                     '<c-p>',
                     function()
                         Snacks.picker.files({
-                            cwd = utils.get_root_directory(),
+                            cwd = vim.fn.getcwd(),
                             hidden = true,
                             exclude = file_ignore_patterns,
                         })
@@ -530,7 +544,7 @@ return {
                     '<c-f>',
                     function()
                         Snacks.picker.grep({
-                            cwd = utils.get_root_directory(),
+                            cwd = vim.fn.getcwd(),
                             hidden = true,
                             exclude = file_ignore_patterns,
                         })
