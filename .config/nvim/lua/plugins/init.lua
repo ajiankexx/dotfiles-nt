@@ -43,7 +43,7 @@ return {
     require('plugins.comment'),
     require('plugins.guess_indent'),
     require('plugins.highlight_colors'),
-    require('plugins.search'),
+    -- require('plugins.search'),
     require('plugins.snacks_config'),
     require('plugins.surround'),
     require('plugins.which_key'),
