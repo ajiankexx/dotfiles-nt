@@ -25,5 +25,3 @@ gui:
   showFileIcons: true
 
 keybinding:
-  universal:
-    return: <c-n>
