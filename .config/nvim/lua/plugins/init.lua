@@ -52,6 +52,9 @@ return {
     require('plugins.img_clip'),
     require('plugins.pastify'),
     require('plugins.kulala'),
-    require('plugins.flash')
+    require('plugins.flash'),
     -- require('plugins.non_ascii')
+    --
+    require('plugins.translate'),
+    -- require('plugins.dict'),
 }
