@@ -8,6 +8,8 @@ return {
     require('plugins.todo_comments'),
     require('plugins.tree_sitter'),
 
+    require('plugins.colorful_winsep'),
+
     -- LSP
     require('plugins.lsp_config'),
     require('plugins.lsp_saga'),
