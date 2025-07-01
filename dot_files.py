@@ -116,6 +116,27 @@ def recover_dot_files(home_current_dir, current_dir):
             recover_dot_files(home_current_dir + recover_file,
                              current_dir + recover_file)
 
+def update_nvim_test():
+    """Copies ./.config/nvim to $HOME/.config/nvim-test."""
+    source_path = os.path.join(os.getcwd(), ".config", "nvim")
+    dest_path = os.path.join(home_dir, ".config", "nvim-test")
+
+    if not os.path.exists(source_path):
+        print(f"Error: Source directory '{source_path}' does not exist.")
+        return
+
+    # Remove existing destination to ensure a clean copy
+    if os.path.exists(dest_path):
+        print(f"Removing existing '{dest_path}'...")
+        shutil.rmtree(dest_path)
+
+    print(f"Copying '{source_path}' to '{dest_path}'...")
+    try:
+        shutil.copytree(source_path, dest_path)
+        print("Nvim configuration copied successfully to nvim-test.")
+    except Exception as e:
+        print(f"Error copying nvim configuration: {e}")
+
 def install_useful_softwares():
     os.system("cd installer && bash installer.sh")
 
@@ -127,6 +148,8 @@ def operate_dot_files(home_current_dir : str, current_dir : str,
     if opcode == "update":
         backup_files(home_current_dir, current_dir)
         update_dot_files(home_current_dir, current_dir)
+    elif opcode == "update-test":
+        update_nvim_test()
     elif opcode == "recover":
         recover_dot_files(home_current_dir, current_dir)
     elif opcode == "init":

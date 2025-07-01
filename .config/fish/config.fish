@@ -94,6 +94,8 @@ set --export EDITOR nvim
 # go
 set --export PATH $PATH /usr/local/go/bin
 set --export PATH $PATH ~/go/bin # for gopls
+# conda
+set --export PATH $PATH ~/miniconda3/bin
 # node
 set --export PATH $PATH ~/node-v20.13.0-linux-x64/bin
 # the directory where user lib pip will install
